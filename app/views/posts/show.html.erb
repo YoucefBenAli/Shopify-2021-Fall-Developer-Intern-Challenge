@@ -1,0 +1,22 @@
+<p class="text-center title">
+  <%= @post.title %>
+<br>
+
+<%= image_tag(@post.image, class: "showImage mt-2 mb-2")%>
+
+</p>
+
+<p>
+  <strong>Author:</strong>
+  <%= @post.author %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @post.content %>
+</p>
+
+<% if @post.user == current_user%>
+  <%= link_to 'Edit', edit_post_path(@post), class: "btn btn-success mb-3" %>
+<%end%>
+<%= link_to 'Back', posts_path, class: "btn btn-primary mb-3" %>

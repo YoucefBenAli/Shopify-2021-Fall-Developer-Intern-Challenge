@@ -1,0 +1,50 @@
+<%= form_with(model: post) do |form| %>
+  <% if post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+        <% post.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field input-group mb-3">
+    <span class="input-group-text">Author</span>
+    <%= form.text_field :author, required: "required", class: "form-control" %>
+  </div>
+
+  <div class="field input-group mb-3">
+    <span class="input-group-text">Title</span>
+    <%= form.text_field :title, required: "required", class: "form-control"  %>
+  </div>
+
+  <div class="field input-group mb-3">
+    <span class="input-group-text">Content</span>
+    <%= form.text_area :content, class: "form-control"  %>
+  </div>
+
+  <div class="field">
+    <% if @post.image.attached? %>
+          <%= image_tag post.image, style: "width;200px; display: block", class: "mb-3, showImage" %>
+    <% end %>
+
+    <%= form.label :image%>
+    <%= form.file_field :image, class: "form-control mb-3", required: "required" %>
+  </div>
+
+  <div class="field form-check mb-3">
+    <%= form.check_box :private, class: "form-check-input" %>
+    <%= form.label :private, class: "form-check-label" %>
+  </div>
+
+  <div class="field">
+    <%= form.number_field :user_id, value: current_user.id, hidden: "hidden" %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Upload Post", class: "btn btn-success mb-3" %>
+  </div>
+<% end %>
